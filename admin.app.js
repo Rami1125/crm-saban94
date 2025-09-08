@@ -4,7 +4,7 @@
  */
 
 // Use the same API_URL from the client app
-const API_URL = 'https://script.google.com/macros/s/AKfycbzldGUaX-PP-_w7PiX5s3v0XD72XkPwZDnPvqNeC4_wKrjWdZDPbgbLg4l1rz_ms4iX/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxumK7SLFzDMQVQDgdHWfFaZ9vtWD4-kAXDcp3qgckkxaRs6Tr_1R9rTlzD4AhtJ7Gc/exec';
 
 // DOM Elements
 const clientsTableBody = document.getElementById('clients-table-body');
