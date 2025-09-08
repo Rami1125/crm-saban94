@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חדר בקרה - ניהול CRM</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=9fZ3EWahbXyH&format=png&color=000000">
+    <link rel="stylesheet" href="admin.styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>חדר בקרה למנהל</h1>
+            <p>שליחת התראות וניהול בקשות לקוחות</p>
+        </header>
+        
+        <main class="dashboard">
+            <section class="card">
+                <h2>לקוחות פעילים</h2>
+                <div class="table-responsive">
+                    <table id="clients-table">
+                        <thead>
+                            <tr>
+                                <th>מס' לקוח</th>
+                                <th>שם לקוח</th>
+                                <th>כתובת</th>
+                                <th>ימים בשטח</th>
+                                <th>פעולה</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clients-table-body">
+                            <!-- Client rows will be injected here by JavaScript -->
+                            <tr><td colspan="5" class="placeholder">טוען לקוחות...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>יומן בקשות אחרונות</h2>
+                <ul id="requests-log">
+                    <!-- Request items will be injected here by JavaScript -->
+                    <li class="placeholder">טוען בקשות...</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for sending notification -->
+    <div id="notification-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            <h3>שליחת התראה ללקוח</h3>
+            <p><strong>אל:</strong> <span id="modal-client-name"></span></p>
+            <form id="notification-form">
+                <input type="hidden" id="modal-client-id">
+                <div class="form-group">
+                    <label for="notification-title">כותרת ההתראה</label>
+                    <input type="text" id="notification-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="notification-body">תוכן ההודעה</label>
+                    <textarea id="notification-body" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn primary">שלח עכשיו</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.app.js"></script>
+</body>
+</html>
