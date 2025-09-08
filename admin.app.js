@@ -4,7 +4,7 @@
  */
 
 // Use the same API_URL from the client app
-const API_URL = 'https://script.google.com/macros/s/AKfycbxumK7SLFzDMQVQDgdHWfFaZ9vtWD4-kAXDcp3qgckkxaRs6Tr_1R9rTlzD4AhtJ7Gc/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzldGUaX-PP-_w7PiX5s3v0XD72XkPwZDnPvqNeC4_wKrjWdZDPbgbLg4l1rz_ms4iX/exec';
 
 // DOM Elements
 const clientsTableBody = document.getElementById('clients-table-body');
@@ -39,8 +39,8 @@ async function fetchData(action) {
  */
 async function loadActiveClients() {
     const data = await fetchData('getAllClients'); // This action needs to be created in Apps Script
-    if (!data || !data.clients) {
-        clientsTableBody.innerHTML = '<tr><td colspan="5" class="placeholder">לא נמצאו לקוחות פעילים או שגיאה בטעינה.</td></tr>';
+    if (!data || !data.clients || data.clients.length === 0) {
+        clientsTableBody.innerHTML = '<tr><td colspan="5" class="placeholder">לא נמצאו לקוחות פעילים.</td></tr>';
         return;
     }
 
@@ -63,7 +63,7 @@ async function loadActiveClients() {
  */
 async function loadRecentRequests() {
     const data = await fetchData('getRecentRequests'); // This action needs to be created in Apps Script
-     if (!data || !data.requests) {
+     if (!data || !data.requests || data.requests.length === 0) {
         requestsLog.innerHTML = '<li class="placeholder">לא נמצאו בקשות אחרונות.</li>';
         return;
     }
@@ -134,14 +134,9 @@ async function handleSendNotification(event) {
 
 // Initial data load
 document.addEventListener('DOMContentLoaded', () => {
-    // These functions will fail until the API is updated
-    // loadActiveClients(); 
-    // loadRecentRequests();
-    // setInterval(loadRecentRequests, 15000); // Refresh requests every 15 seconds
-    
-    // Use dummy data for now
-    clientsTableBody.innerHTML = '<tr><td colspan="5" class="placeholder">יש לעדכן את קוד השרת (Apps Script) כדי לטעון נתונים.</td></tr>';
-    requestsLog.innerHTML = '<li class="placeholder">יש לעדכן את קוד השרת.</li>';
+    loadActiveClients(); 
+    loadRecentRequests();
+    setInterval(loadRecentRequests, 15000); // Refresh requests every 15 seconds
 });
 
 // Modal listeners
@@ -154,3 +149,4 @@ clientsTableBody.addEventListener('click', (event) => {
 
 modalCloseBtn.addEventListener('click', () => modal.style.display = 'none');
 notificationForm.addEventListener('submit', handleSendNotification);
+
